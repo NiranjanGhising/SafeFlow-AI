@@ -1,0 +1,22 @@
+{
+  "project_name": "SafeFlow AI",
+  "raw_trace_path": "outputs/gate_trace.json",
+  "database_path": "data/safeflow_analytics.db",
+  "export_directory": "data/exports",
+  "allowed_actions": [
+    "allow",
+    "warn",
+    "redact",
+    "block"
+  ],
+  "recognized_categories": [
+    "benign",
+    "role-play",
+    "instruction-override",
+    "context-smuggling",
+    "multi-turn-ramp",
+    "encoding-trick",
+    "prefix-injection"
+  ],
+  "incremental_key": "request_id"
+}
