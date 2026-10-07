@@ -1,0 +1,5 @@
+action_key,action_name,severity_rank,risk_level
+1,allow,1,Low
+2,warn,2,Medium
+3,redact,3,High
+4,block,4,Critical

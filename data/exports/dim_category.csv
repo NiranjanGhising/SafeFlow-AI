@@ -1,0 +1,8 @@
+category_key,category_name,category_description,is_attack_category
+1,benign,A normal prompt that does not contain a recognized attack.,0
+2,role-play,"An attempt to bypass safety controls using fictional roles, personas, or simulated scenarios.",1
+3,instruction-override,An attempt to replace or ignore the system's existing instructions.,1
+4,context-smuggling,An attempt to hide unauthorized instructions inside apparently legitimate contextual information.,1
+5,multi-turn-ramp,An attack that gradually increases risk across multiple interactions.,1
+6,encoding-trick,"An attempt to hide instructions using encoding, obfuscation, or alternative representations.",1
+7,prefix-injection,An attempt to force the generated response to begin with attacker-controlled text.,1
