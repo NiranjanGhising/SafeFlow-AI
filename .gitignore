@@ -1,0 +1,89 @@
+# Python bytecode, caches, and test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+.streamlit/secrets.toml
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local databases and runtime artifacts
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# Generated project outputs
+output/*
+outputs/*
+!output/.gitkeep
+!outputs/.gitkeep
+output/*.json
+outputs/*.json
+output/**/*.json
+outputs/**/*.json
+
+# Generated source data folders
+data/raw/*
+!data/raw/.gitkeep
+data/exports/*
+!data/exports/.gitkeep
+data/*.db
+
+# Power BI and export artifacts
+*.pbix
+*.pbit
+
+# Build and packaging files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local archives
+*.zip
+*.tar
+*.tar.gz
+
+# Optional: keep local config when present but not tracked
+config/local_settings.json
+config/*.local.json

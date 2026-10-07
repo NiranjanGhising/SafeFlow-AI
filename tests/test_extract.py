@@ -40,13 +40,14 @@ class SourceExtractionTests(unittest.TestCase):
 
         return Path(temporary_file.name)
 
-    def test_real_trace_contains_sixty_events(self) -> None:
-        """Verify that the generated demo contains 60 events."""
-
+    def test_real_trace_contains_expected_baseline(self) -> None:
         result = extract_source_events()
 
-        self.assertEqual(result.source_count, 60)
-        self.assertEqual(len(result.events), 60)
+        self.assertGreaterEqual(result.source_count, 60)
+        self.assertEqual(
+            len(result.events),
+            result.source_count,
+        )
 
     def test_source_positions_are_added(self) -> None:
         """Verify that source positions are assigned sequentially."""

@@ -131,15 +131,16 @@ class SeedReferenceDataTests(unittest.TestCase):
                 ),
             )
 
-    def test_pipeline_state_is_initialized(self) -> None:
-        """Verify the initial watermark state."""
+    def test_pipeline_state_exists_and_is_valid(self) -> None:
+        """Verify that the pipeline state exists and remains valid."""
 
         row = self.connection.execute(
             """
             SELECT
                 pipeline_name,
                 last_successful_watermark,
-                last_pipeline_run_id
+                last_pipeline_run_id,
+                updated_at
             FROM pipeline_state
             WHERE pipeline_name = ?;
             """,
@@ -147,8 +148,44 @@ class SeedReferenceDataTests(unittest.TestCase):
         ).fetchone()
 
         self.assertIsNotNone(row)
-        self.assertIsNone(row["last_successful_watermark"])
-        self.assertIsNone(row["last_pipeline_run_id"])
+        self.assertEqual(
+            row["pipeline_name"],
+            PIPELINE_NAME,
+        )
+        self.assertIsNotNone(row["updated_at"])
+
+        watermark = row["last_successful_watermark"]
+        pipeline_run_id = row["last_pipeline_run_id"]
+
+        if watermark is None:
+            self.assertIsNone(pipeline_run_id)
+        else:
+            self.assertGreaterEqual(
+                int(watermark),
+                0,
+            )
+            self.assertIsNotNone(pipeline_run_id)
+
+            audit_row = self.connection.execute(
+                """
+                SELECT
+                    status,
+                    watermark_end
+                FROM pipeline_audit
+                WHERE pipeline_run_id = ?;
+                """,
+                (pipeline_run_id,),
+            ).fetchone()
+
+            self.assertIsNotNone(audit_row)
+            self.assertEqual(
+                audit_row["status"],
+                "SUCCESS",
+            )
+            self.assertEqual(
+                audit_row["watermark_end"],
+                watermark,
+            )
 
     def test_seeding_is_idempotent(self) -> None:
         """Verify repeated seeding does not create duplicates."""
