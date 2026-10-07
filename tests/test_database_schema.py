@@ -293,6 +293,8 @@ class DatabaseSchemaTests(unittest.TestCase):
             ),
         )
 
+        date_key = 20261007
+
         self.connection.execute(
             """
             INSERT INTO dim_date (
@@ -305,10 +307,11 @@ class DatabaseSchemaTests(unittest.TestCase):
                 year,
                 day_name
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(date_key) DO NOTHING;
             """,
             (
-                20261007,
+                date_key,
                 "2026-10-07",
                 7,
                 10,
